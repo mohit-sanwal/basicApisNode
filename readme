@@ -1,0 +1,7 @@
+// to statically accessing html pages while hitting in the browser url
+// app.use(express.static(`${publicPath}`));
+
+// to include common header in ejs templating engine
+<!-- <%- include('common/header'); %> -->
+
+
