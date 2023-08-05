@@ -12,3 +12,26 @@ route level filter
 
 
 
+<!-- mongo is deprecated in the new version better to use mongosh once installed -->
+
+
+<!-- when users data is not structured then mongo is best 
+when user data is structured then should proceed with SQl -->
+
+use 'databasename' - to create a database.
+
+db.createCollection('videos') - to create a createCollection
+
+show collections - to show  collections
+
+db.videos.drop() - to drop a collection here it will drop videos collection
+
+db.dropDatabase() - to drop the database
+
+db.products.updateOne({name: "A"}, {$set: {name: "ABC"}})
+
+db.products.deleteOne({name: "A"})
+
+
+
+db.products.find() - to display the items inside collection

@@ -1,25 +1,18 @@
-const express = require('express');
-const requestFilter = require('./middleware');
-const app = express();
+const {MongoClient} = require('mongodb');
 
-const route = express.Router();
+const url = 'mongodb://localhost:27017';
+const database = 'e-comm';
 
-// applying middleware to single route/ the route we want
-// app.use(requestFilter);
-route.use(requestFilter);
-route.get('/', (req, res) => {
-    res.send('welcome to home page')
-}) 
+// to get the data from mongo data base
+const client = new MongoClient(url);
 
-route.get('/users', (req, res) => {
-    res.send('welcome to users page')
-}) 
+async function getData() {
+ let result = await client.connect();
+ let db = result.db(database);
+ let collection = db.collection('products');
+ const response = await collection.find({}).toArray();
+ console.log('data retrieved--', response);
+}
 
 
-app.get('/about', (req, res) => {
-    res.send('welcome to about page')
-}) 
-
-app.use('/', route);
-
-app.listen(3000);
+getData();
