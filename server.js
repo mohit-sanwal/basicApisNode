@@ -1,40 +1,30 @@
 const express = require('express');
-const path = require('path');
 
 const app = express();
-const publicPath = path.join(__dirname, 'public');
 
-app.set('view engine', 'ejs')
-
-
-// to statically accessing html pages while hitting in the browser url
-// app.use(express.static(`${publicPath}`));
-
-/* removing extention .html from the url */
-
-app.get('', (req, res) => {
-   res.sendFile(`${publicPath}/index.html`);
-})
-
-app.get('/about', (req, res) => {
-    res.sendFile(`${publicPath}/about.html`);
-})
-
-/* templating engine ejs */
-
-
-app.get('/profile', (req, res) => {
-    const user = {
-        name: 'mohit',
-        email: 'mohit123ongraph@gmail.com',
-        hobbies: ['sports', 'music']
+const requestFilter = (req, res, next) => {
+  if(!req.query.age) {
+    res.send('please provide age')
+  } else {
+    if (req.query.age < 18) {
+     res.send('you can not access this page')
+    } else {
+        // if we have alredy send response after that we can not access next that why adding in else
+      next();
     }
-    res.render('profile', {user});
-})
+  }
+}
+
+app.use(requestFilter);
+
+app.get('/', (req, res) => {
+    res.send('welcome to home page')
+}) 
+
+app.get('/users', () => {
+    res.send('users..')
+}) 
 
 
-app.get('/login', (req, res) => {
-    res.render('login');
-})
 
-app.listen(5000);
+app.listen(3000);
