@@ -15,14 +15,20 @@ const requestFilter = (req, res, next) => {
   }
 }
 
-app.use(requestFilter);
+// applying middleware to single route/ the route we want
+// app.use(requestFilter);
 
-app.get('/', (req, res) => {
+app.get('/', requestFilter, (req, res) => {
     res.send('welcome to home page')
 }) 
 
-app.get('/users', () => {
-    res.send('users..')
+app.get('/users', (req, res) => {
+    res.send('welcome to users page')
+}) 
+
+
+app.get('/about', (req, res) => {
+    res.send('welcome to about page')
 }) 
 
 

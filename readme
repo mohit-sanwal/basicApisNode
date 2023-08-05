@@ -5,3 +5,10 @@
 <!-- <%- include('common/header'); %> -->
 
 
+middleware is used to filter req and res commanly.
+
+application level middleware
+route level filter
+
+
+
