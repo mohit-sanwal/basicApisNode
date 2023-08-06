@@ -4,6 +4,7 @@ const dbConnect = require('./mongodb');
 const app = express();
 
 // to use get the request or postman data available in req
+app.use(express.json());
 
 
 // get api
@@ -15,7 +16,13 @@ app.get('/', async(req, resp) => {
     resp.send(resData);
 })
 
-
+app.post('/', async(req, resp) => {
+    // console.log('request body', req.body);
+    let db = await dbConnect();
+    let resData = await db.insertMany([req.body])
+    // console.log('response data', resData)
+    resp.send(resData);
+})
 
 
 app.listen(5000)
