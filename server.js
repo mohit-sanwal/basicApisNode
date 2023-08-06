@@ -20,7 +20,16 @@ const saveInDb = async () => {
     console.log(result);
 }
 
-saveData();
+
+const readFromDb = async () => {
+    const ProductModel = mongoose.model('products', ProductSchema);
+    let data = await ProductModel.find();
+    console.log(data);
+}
+
+
+readFromDb()
+// saveData();
 
 
 
