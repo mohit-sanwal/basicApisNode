@@ -1,6 +1,6 @@
 const express = require('express');
 const dbConnect = require('./mongodb');
-const ObjectId = require('mongodb').ObjectID;
+const mongodb = require('mongodb');
 
 const app = express();
 
@@ -26,10 +26,23 @@ app.post('/', async(req, resp) => {
 })
 
 
+// put
 app.put('/:name', async(req, resp) => {
     console.log('request body',req.body, req.params.id);
     let db = await dbConnect();
     let resData = await db.updateOne({ name: req.params.name}, {$set: req.body})
+    // console.log('response data', resData)
+    if(resData.acknowledged) {
+      resp.send(resData);
+    }
+})
+
+
+app.delete('/:id', async(req, resp) => {
+    const id = (req.params.id).trim();
+    console.log('request body',req.body, req.params.id);
+    let db = await dbConnect();
+    let resData = await db.deleteOne({_id: new mongodb.ObjectId(id)})
     // console.log('response data', resData)
     if(resData.acknowledged) {
       resp.send(resData);
