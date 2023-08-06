@@ -16,3 +16,12 @@ deleteData();
 
 // deleteOne
 // deleteMany
+
+
+/*
+q:1 how to check if data is deleted or not - need to check for deletedCount
+
+q:2 if data is not present in db still we are trying to delete it. It will not throw
+ error and give acknowledged as true but will give deleted count as zero.
+
+*/
