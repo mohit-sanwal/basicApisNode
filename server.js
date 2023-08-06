@@ -32,11 +32,28 @@ app.put('/updateProduct/:_id', async (req, resp) => {
     const id = (req.params._id).trim();
     // const data = await Product.updateOne({_id: new mongodb.ObjectId(id)}, {$set: req.body});
     const data = await Product.updateOne(req.params, {$set: req.body});
-    console.log('data===', data);
     resp.send(data);
+})
+
+
+app.get('/search/:key', async(req, resp) => {
+    console.log('keyName--', req.params.key);
+    let data = await Product.find({ 
+        "$or" : [
+            {"name":{$regex: req.params.key} },
+            {"brand":{$regex: req.params.key} }
+          ] 
+       }
+    )
+    console.log('data--', data);
+    resp.send(data)
 })
 
 
 
 
 app.listen(5000);
+
+// for delete we should send the id into query params
+// for update it's up to us where we want to send either body or query params
+
