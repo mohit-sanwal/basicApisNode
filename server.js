@@ -1,22 +1,26 @@
 
 const mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost:27017/e-comm");
+const ProductSchema = new mongoose.Schema({
+    name:String,
+    price: Number,
+    brand: String,
+    category: String
+})
 
-
-const main = async () => {
-    await mongoose.connect("mongodb://localhost:27017/e-comm");
-    const ProductSchema = new mongoose.Schema({
-        name:String,
-        price: Number
-    })
+const saveInDb = async () => {
     const ProductsModel = mongoose.model('products', ProductSchema);
-    let data = new ProductsModel({name: 'm8', price: 123});
+    let data = new ProductsModel({
+        name: 'm8', 
+        price: 123,
+        brand: 'oneplus',
+        category: 'mobile'
+    });
     let result = await data.save();
     console.log(result);
 }
 
-main();
-
-
+saveData();
 
 
 
