@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const mongodb = require('mongodb');
+const multer = require('multer');
 require('./configs');
 const Product = require('./product');
 const app = express();
@@ -49,7 +50,39 @@ app.get('/search/:key', async(req, resp) => {
     resp.send(data)
 })
 
+/***
+ * can we use post and Put method to create search api - yes, but recommended is get
+ * delete method is only used for delete the records
+ * 
+ * 
+ */
 
+
+/***
+ * 
+ * File upload
+ */
+
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: function(req, file, cb){
+            cb(null, "uploads")
+        },
+        filename: function(req, file, cb) {
+            cb(null, file.fieldname+"-"+Date.now()+".jpg")
+        }
+    })
+}).single("user_file")
+
+
+app.post('/upload', upload, (req, resp) => {
+
+    resp.send('file uploaded');
+})
+
+/***
+ * can we upload file without multer - yes
+ */
 
 
 app.listen(5000);
