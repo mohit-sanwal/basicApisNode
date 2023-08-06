@@ -1,4 +1,4 @@
-const dbConnect = require('./mongodb');
+const dbConnect = require('../mongodb');
 
 const updateData = async() => {
     console.log('update called...')
