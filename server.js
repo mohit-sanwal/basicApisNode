@@ -28,8 +28,17 @@ const readFromDb = async () => {
 }
 
 
-readFromDb()
+const updateInDb = async () => {
+    const ProductModel = mongoose.model('products', ProductSchema);
+    let data = await ProductModel.updateOne({name: 'm8'}, {$set: {name: 'M8onepluspro'}});
+    console.log('data..', data)
+}
+
 // saveData();
+// readFromDb();
+
+updateInDb()
+
 
 
 
