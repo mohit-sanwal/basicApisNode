@@ -34,10 +34,17 @@ const updateInDb = async () => {
     console.log('data..', data)
 }
 
+const deleteFromDb = async () => {
+    const ProductModel = mongoose.model('products', ProductSchema);
+    let data = await ProductModel.deleteMany({name: 'M8onepluspro'})
+    console.log(data);
+}
+
 // saveData();
 // readFromDb();
+//updateInDb();
+deleteFromDb();
 
-updateInDb()
 
 
 
