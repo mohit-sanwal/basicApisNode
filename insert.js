@@ -29,3 +29,7 @@ const insert = async() => {
 
 
 insert();
+
+
+// insertOne
+// insertMany
